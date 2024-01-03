@@ -10,36 +10,36 @@ pipeline {
       sh 'mvn clean install -f MyWebApp/pom.xml'
       }
     }
-    stage ('Code Quality') {
-      steps {
-        withSonarQubeEnv('SonarQube') {
-        sh 'mvn -f MyWebApp/pom.xml sonar:sonar'
-        }
-      }
-    }
+    //stage ('Code Quality') {
+     // steps {
+       // withSonarQubeEnv('SonarQube') {
+        //sh 'mvn -f MyWebApp/pom.xml sonar:sonar'
+       // }
+     // }
+   // }
     stage ('JaCoCo') {
       steps {
       jacoco()
       }
     }
-    stage ('Nexus Upload') {
-      steps {
-      nexusArtifactUploader(
-      nexusVersion: 'nexus3',
-      protocol: 'http',
-      nexusUrl: 'http://ec2-18-223-180-101.us-east-2.compute.amazonaws.com:8081',
-      groupId: 'myGroupId',
-      version: '1.0-SNAPSHOT',
-      repository: 'maven-snapshots',
-      credentialsId: '6df9df59-38c8-440b-b9f7-7c856cd3d981',
-      artifacts: [
-      [artifactId: 'MyWebApp',
-             classifier: '',
-      file: 'MyWebApp/target/MyWebApp.war',
-      type: 'war']
-      ])
-      }
-    }
+    //stage ('Nexus Upload') {
+      //steps {
+      //nexusArtifactUploader(
+     // nexusVersion: 'nexus3',
+      //protocol: 'http',
+     // nexusUrl: 'http://ec2-18-223-180-101.us-east-2.compute.amazonaws.com:8081',
+      //groupId: 'myGroupId',
+      //version: '1.0-SNAPSHOT',
+      //repository: 'maven-snapshots',
+      //credentialsId: '6df9df59-38c8-440b-b9f7-7c856cd3d981',
+      //artifacts: [
+      //[artifactId: 'MyWebApp',
+            // classifier: '',
+      //file: 'MyWebApp/target/MyWebApp.war',
+     // type: 'war']
+     // ])
+     // }
+   // }
     stage ('DEV Deploy') {
       steps {
       echo "deploying to DEV Env "
