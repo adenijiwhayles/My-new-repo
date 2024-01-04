@@ -43,7 +43,7 @@ pipeline {
     stage ('DEV Deploy') {
       steps {
       echo "deploying to DEV Env "
-      deploy adapters: [tomcat9(credentialsId: 'b748541d-6d0e-4ff7-b89b-6f04e6310434', path: '', url: 'http://ec2-3-138-141-177.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
+      deploy adapters: [tomcat9(credentialsId: 'b748541d-6d0e-4ff7-b89b-6f04e6310434', path: '', url: 'http://ec2-18-216-135-25.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
       }
     }
     stage ('Slack Notification') {
@@ -63,7 +63,7 @@ pipeline {
      stage ('QA Deploy') {
       steps {
         echo "deploying to QA Env "
-        deploy adapters: [tomcat9(credentialsId: 'b748541d-6d0e-4ff7-b89b-6f04e6310434', path: '', url: 'http://ec2-3-138-141-177.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
+        deploy adapters: [tomcat9(credentialsId: 'b748541d-6d0e-4ff7-b89b-6f04e6310434', path: '', url: 'http://ec2-18-216-135-25.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
         }
     }
     stage ('QA Approve') {
